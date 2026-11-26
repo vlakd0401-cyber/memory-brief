@@ -1,5 +1,5 @@
 {
- "asOf": "2026-11-26 22:45 (KST)",
+ "asOf": "2026-11-27 06:50 (KST)",
  "items": [
   {
    "group": "내 종목",
@@ -121,11 +121,11 @@
   {
    "group": "거시",
    "label": "원/달러",
-   "value": "1,343.4",
+   "value": "1,343.0",
    "unit": "원",
    "change": "0.2원",
-   "dir": "up",
-   "asOf": "11/26 22:40",
+   "dir": "down",
+   "asOf": "11/27 06:40",
    "source": "Yahoo Finance",
    "sym": "KRW=X"
   },
