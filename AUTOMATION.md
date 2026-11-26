@@ -33,7 +33,7 @@
    - source, url(실제로 확인한 https:// 주소만), extraLinks(선택), addedAt(ISO8601 +09:00)
    - 핵심(importance 3) 이슈는 원문 확인: WebFetch(또는 web-fetch 에이전트)로 원문을 엽니다. 네트워크 정책으로 열리지 않으면 같은 사안의 기사 2곳 이상을 WebSearch로 교차 확인합니다. 원문을 읽었으면 verified: true, 아니면 false. 핵심 이슈에는 detail(4~6개 문자열 배열: 배경, 세부 수치, 발언·근거, 향후 일정)을 추가합니다.
 5. 쓰기: 새 항목을 추가하고 date 내림차순(같으면 importance 내림차순)으로 정렬해 data/issues.json을 "한 줄에 한 항목" 형식(ensure_ascii=False)으로 다시 씁니다. JSON 파싱을 확인합니다.
-6. 지표 갱신: data/indicators.json 각 항목(group·label·unit 유지)의 value(천 단위 쉼표 문자열), change, dir(up|down|flat), asOf(기준일, 예 "11/27"), source를 최신값으로 고치고 최상위 asOf에 수집 시각("YYYY-MM-DD HH:MM (KST)")을 씁니다. 종가는 해당 시장의 최신 정규장 종가를 씁니다. 신뢰할 만한 값을 못 찾으면 직전 값과 asOf를 그대로 둡니다(추정치 금지). 출처끼리 다르면 거래소·지수 관리 기관 값을 우선합니다.
+6. 지표 갱신: data/indicators.json 각 항목(group·label·unit·sym 유지. sym이 있는 항목은 페이지가 장중 1분마다 실시간 시세로 덮어쓰지만, 시세를 못 받을 때를 대비해 값을 계속 갱신)의 value(천 단위 쉼표 문자열), change, dir(up|down|flat), asOf(기준일, 예 "11/27"), source를 최신값으로 고치고 최상위 asOf에 수집 시각("YYYY-MM-DD HH:MM (KST)")을 씁니다. 종가는 해당 시장의 최신 정규장 종가를 씁니다. 신뢰할 만한 값을 못 찾으면 직전 값과 asOf를 그대로 둡니다(추정치 금지). 출처끼리 다르면 거래소·지수 관리 기관 값을 우선합니다.
 7. 일정 갱신: data/calendar.json에서 지난 일정은 지우고, 앞으로 6주 안의 주요 일정을 추가·확인합니다: 美 고용보고서·CPI·PPI·PCE·소매판매·GDP, FOMC, 한국은행 금통위, 한국 수출입 동향(매월 1일, 1~20일 수출), 삼성전자·SK하이닉스·마이크론·알파벳·엔비디아 실적 발표, 주요 업계 행사(CES 등). date·time은 한국시간으로 변환(미 동부 8:30 = 한국 22:30, 서머타임 기간에는 21:30). 회사가 공식 발표하지 않은 날짜는 note에 "예상 일정"이라고 씁니다. kind: macro|earn|kr.
 8. data/meta.json을 {"lastUpdated":"YYYY-MM-DD (요일) HH:MM · HH:MM 회차 N건 추가","lastRun":"ISO시각"}로 갱신합니다(0건이어도 갱신).
 9. 커밋·푸시: `git add data && git commit -m "갱신: YYYY-MM-DD HH:MM 회차 N건"` 후 `git push origin main`. 거부되면 `git pull --rebase origin main` 후 한 번 더, 네트워크 오류는 2·4·8초 간격 최대 3회 재시도. main에 직접 푸시하고 브랜치·PR은 만들지 않습니다.

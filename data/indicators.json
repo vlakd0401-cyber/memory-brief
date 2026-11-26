@@ -9,7 +9,8 @@
    "change": "9.87%",
    "dir": "down",
    "asOf": "11/25",
-   "source": "한국거래소"
+   "source": "한국거래소",
+   "sym": "005930.KS"
   },
   {
    "group": "내 종목",
@@ -19,7 +20,8 @@
    "change": "11.05%",
    "dir": "down",
    "asOf": "11/25",
-   "source": "한국거래소"
+   "source": "한국거래소",
+   "sym": "000660.KS"
   },
   {
    "group": "내 종목",
@@ -29,7 +31,8 @@
    "change": "4.53%",
    "dir": "down",
    "asOf": "11/25",
-   "source": "Nasdaq"
+   "source": "Nasdaq",
+   "sym": "MU"
   },
   {
    "group": "내 종목",
@@ -39,7 +42,8 @@
    "change": "2.13%",
    "dir": "down",
    "asOf": "11/25",
-   "source": "Nasdaq"
+   "source": "Nasdaq",
+   "sym": "GOOGL"
   },
   {
    "group": "내 종목",
@@ -49,7 +53,8 @@
    "change": "등락률 확인 중",
    "dir": "flat",
    "asOf": "11/25",
-   "source": "NYSE Arca"
+   "source": "NYSE Arca",
+   "sym": "SOXL"
   },
   {
    "group": "업황",
@@ -59,7 +64,8 @@
    "change": "4.28%",
    "dir": "down",
    "asOf": "11/25",
-   "source": "Nasdaq"
+   "source": "Nasdaq",
+   "sym": "^SOX"
   },
   {
    "group": "업황",
@@ -99,7 +105,8 @@
    "change": "0.62%",
    "dir": "down",
    "asOf": "11/25",
-   "source": "Nasdaq"
+   "source": "Nasdaq",
+   "sym": "^IXIC"
   },
   {
    "group": "거시",
@@ -119,7 +126,8 @@
    "change": "3.0원",
    "dir": "down",
    "asOf": "11/25 고시",
-   "source": "한국수출입은행"
+   "source": "한국수출입은행",
+   "sym": "KRW=X"
   },
   {
    "group": "거시",

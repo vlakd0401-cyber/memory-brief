@@ -67,6 +67,11 @@ ul.sum li::marker{color:var(--ink-2)}
 .ticker{grid-area:tick;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 18px 16px;margin-bottom:24px;min-width:0}
 .tk-head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;justify-content:space-between;margin-bottom:10px}
 .tk-title{font-size:14px;font-weight:700} .tk-asof{font-size:12px;color:var(--ink-2)}
+.tk-live{font-size:12px;font-weight:700;color:var(--hot);display:inline-flex;align-items:center;gap:5px}
+.tk-live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--hot);animation:tkp 2s infinite}
+@keyframes tkp{50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){.tk-live::before{animation:none}}
+.tk-item.live .tk-date{color:var(--hot)}
 .tk-sample{font-size:12px;font-weight:700;color:var(--mid);background:var(--mid-soft);border-radius:6px;padding:2px 8px}
 .tk-groups{display:flex;flex-wrap:wrap;gap:16px 36px}
 .tk-group{flex:0 1 auto;min-width:0}
@@ -291,12 +296,53 @@ footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
     });
     box.appendChild(ul); box.hidden = false;
   }
+  let IND = null, qTimer = null;
+  const hhmm = ms => { const d = new Date(ms + 9*3600e3); return String(d.getUTCHours()).padStart(2,"0") + ":" + String(d.getUTCMinutes()).padStart(2,"0"); };
+  function fmtNum(v, sym){
+    const dec = /\.KS$/.test(sym) ? 0 : sym === "KRW=X" ? 1 : 2;
+    return v.toLocaleString("en-US", {minimumFractionDigits: dec, maximumFractionDigits: dec});
+  }
+  function marketsOpen(){
+    const k = new Date(Date.now() + 9*3600e3), day = k.getUTCDay(), m = k.getUTCHours()*60 + k.getUTCMinutes();
+    const kr = day >= 1 && day <= 5 && m >= 9*60 && m <= 15*60+40;
+    // 미국 정규장(한국시간 23:30~06:00, 서머타임 22:30~05:00)을 넉넉히 포함
+    const us = (day >= 1 && day <= 5 && m >= 22*60+20) || (day >= 2 && day <= 6 && m <= 6*60+10);
+    const fx = day >= 1 && day <= 5 && m >= 8*60+50 && m <= 18*60;
+    return kr || us || fx;
+  }
+  async function loadQuotes(){
+    try {
+      const r = await fetch("api/quotes", {cache:"no-store"}); if (!r.ok) throw 0;
+      const j = await r.json(); const q = j && j.quotes; if (!q || !IND || !Array.isArray(IND.items)) throw 0;
+      let any = false;
+      IND.items.forEach(it => {
+        const x = it.sym && q[it.sym]; if (!x || typeof x.price !== "number") return;
+        it.value = fmtNum(x.price, it.sym);
+        if (typeof x.prev === "number" && x.prev){
+          const diff = x.price - x.prev, pct = diff / x.prev * 100;
+          it.dir = diff > 0 ? "up" : diff < 0 ? "down" : "flat";
+          it.change = it.sym === "KRW=X" ? Math.abs(diff).toFixed(1) + "원" : Math.abs(pct).toFixed(2) + "%";
+        }
+        it.asOf = x.time ? hhmm(x.time*1000) + (/\.KS$/.test(it.sym) ? " (지연 가능)" : "") : it.asOf;
+        it.live = true; any = true;
+      });
+      if (any){ IND.liveAt = hhmm(j.fetchedAt || Date.now()); renderTicker(IND); }
+    } catch(e) { /* 시세를 못 받으면 하루 4회 갱신값을 그대로 둠 */ }
+  }
+  function startQuotes(){
+    if (!IND || !IND.items.some(i => i.sym)) return;
+    loadQuotes();
+    const tick = () => { qTimer = setTimeout(async () => { if (!document.hidden) await loadQuotes(); tick(); }, marketsOpen() ? 60e3 : 10*60e3); };
+    tick();
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) loadQuotes(); });
+  }
   function renderTicker(ind){
     const box = $("#ticker"); box.textContent = "";
     const items = ind && Array.isArray(ind.items) ? ind.items : [];
     if (!items.length){ box.hidden = true; return; }
     const head = el("div","tk-head"); const left = el("div"); left.style.display="flex"; left.style.gap="8px"; left.style.alignItems="baseline";
     left.appendChild(el("span","tk-title","주요 지표"));
+    if (ind.liveAt) left.appendChild(el("span","tk-live","실시간 시세 " + ind.liveAt));
     if (ind.sample) left.appendChild(el("span","tk-sample","예시 수치 · 실제 값 아님"));
     head.appendChild(left); head.appendChild(el("span","tk-asof", ind.asOf ? "수집 " + ind.asOf : "")); box.appendChild(head);
     const groups = el("div","tk-groups"); const order = []; const map = {};
@@ -304,7 +350,7 @@ footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
     order.forEach(g => {
       const gd = el("div","tk-group"); gd.appendChild(el("div","tk-glabel", g)); const row = el("div","tk-items");
       map[g].forEach(it => {
-        const c = el("div","tk-item"); c.title = [it.asOf && ("기준 " + it.asOf), it.source && ("출처 " + it.source)].filter(Boolean).join(" · ");
+        const c = el("div","tk-item" + (it.live ? " live" : "")); c.title = [it.asOf && ("기준 " + it.asOf), it.source && ("출처 " + it.source)].filter(Boolean).join(" · ");
         c.appendChild(el("div","tk-label", it.label || ""));
         const v = el("div","tk-value", it.value != null ? String(it.value) : "–"); if (it.unit) v.appendChild(el("span","tk-unit", it.unit)); c.appendChild(v);
         const dir = it.dir === "up" ? "up" : it.dir === "down" ? "down" : "flat";
@@ -316,7 +362,7 @@ footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
     });
     box.appendChild(groups);
     const srcs = [...new Set(items.map(i => i.source).filter(Boolean))];
-    if (srcs.length) box.appendChild(el("div","tk-src", "출처: " + srcs.join(", ") + " · 각 수치 아래 날짜는 기준일, 변동은 직전 발표 대비 · 하루 두 번 갱신되는 참고용 수치"));
+    if (srcs.length) box.appendChild(el("div","tk-src", "출처: " + srcs.join(", ") + " · 주가·지수·환율은 장중 1분마다 갱신(Yahoo Finance, 한국 주식은 최대 20분 지연 가능) · 그 외 지표는 하루 4회 갱신"));
     box.hidden = false;
   }
 
@@ -324,7 +370,7 @@ footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
     const note = $("#note");
     try {
       const v = "?t=" + Math.floor(Date.now()/60000);
-      fetch(IND_URL+v, {cache:"no-store"}).then(r => r.ok ? r.json() : null).then(renderTicker).catch(() => {});
+      fetch(IND_URL+v, {cache:"no-store"}).then(r => r.ok ? r.json() : null).then(d => { IND = d; renderTicker(IND); startQuotes(); }).catch(() => {});
       fetch(CAL_URL+v, {cache:"no-store"}).then(r => r.ok ? r.json() : null).then(renderCal).catch(() => {});
       const [ir, mr] = await Promise.all([fetch(ISSUES_URL+v, {cache:"no-store"}), fetch(META_URL+v, {cache:"no-store"})]);
       if (!ir.ok) throw new Error("HTTP " + ir.status);
