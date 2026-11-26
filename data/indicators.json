@@ -1,0 +1,135 @@
+{
+ "asOf": "2026-11-26 14:00 (KST)",
+ "items": [
+  {
+   "group": "내 종목",
+   "label": "삼성전자",
+   "value": "170,700",
+   "unit": "원",
+   "change": "9.87%",
+   "dir": "down",
+   "asOf": "11/25",
+   "source": "한국거래소"
+  },
+  {
+   "group": "내 종목",
+   "label": "SK하이닉스",
+   "value": "1,030,000",
+   "unit": "원",
+   "change": "11.05%",
+   "dir": "down",
+   "asOf": "11/25",
+   "source": "한국거래소"
+  },
+  {
+   "group": "내 종목",
+   "label": "마이크론(MU)",
+   "value": "601.25",
+   "unit": "$",
+   "change": "4.53%",
+   "dir": "down",
+   "asOf": "11/25",
+   "source": "Nasdaq"
+  },
+  {
+   "group": "내 종목",
+   "label": "구글(GOOGL)",
+   "value": "273.10",
+   "unit": "$",
+   "change": "2.13%",
+   "dir": "down",
+   "asOf": "11/25",
+   "source": "Nasdaq"
+  },
+  {
+   "group": "내 종목",
+   "label": "SOXL",
+   "value": "30.47",
+   "unit": "$",
+   "change": "등락률 확인 중",
+   "dir": "flat",
+   "asOf": "11/25",
+   "source": "NYSE Arca"
+  },
+  {
+   "group": "업황",
+   "label": "SOX 지수",
+   "value": "8,454.08",
+   "unit": "",
+   "change": "4.28%",
+   "dir": "down",
+   "asOf": "11/25",
+   "source": "Nasdaq"
+  },
+  {
+   "group": "업황",
+   "label": "DDR5 16Gb 현물",
+   "value": "60.83",
+   "unit": "$",
+   "change": "보합",
+   "dir": "flat",
+   "asOf": "11/25",
+   "source": "TrendForce"
+  },
+  {
+   "group": "업황",
+   "label": "DDR4 8Gb 현물",
+   "value": "44.25",
+   "unit": "$",
+   "change": "1.43%",
+   "dir": "down",
+   "asOf": "11/17",
+   "source": "TrendForce"
+  },
+  {
+   "group": "업황",
+   "label": "NAND 512Gb TLC 웨이퍼",
+   "value": "14.24",
+   "unit": "$",
+   "change": "현물-계약가 괴리 20%↑",
+   "dir": "down",
+   "asOf": "11/9",
+   "source": "TrendForce"
+  },
+  {
+   "group": "거시",
+   "label": "나스닥",
+   "value": "23,585.80",
+   "unit": "",
+   "change": "0.62%",
+   "dir": "down",
+   "asOf": "11/25",
+   "source": "Nasdaq"
+  },
+  {
+   "group": "거시",
+   "label": "美 국채 10년",
+   "value": "4.85",
+   "unit": "%",
+   "change": "0.08%p",
+   "dir": "down",
+   "asOf": "11/25",
+   "source": "美 국채시장(뉴욕 마감)"
+  },
+  {
+   "group": "거시",
+   "label": "원/달러",
+   "value": "1,343.6",
+   "unit": "원",
+   "change": "3.0원",
+   "dir": "down",
+   "asOf": "11/25 고시",
+   "source": "한국수출입은행"
+  },
+  {
+   "group": "거시",
+   "label": "美 기준금리",
+   "value": "3.75~4.00",
+   "unit": "%",
+   "change": "동결",
+   "dir": "flat",
+   "asOf": "10/28 FOMC",
+   "source": "Fed"
+  }
+ ]
+}

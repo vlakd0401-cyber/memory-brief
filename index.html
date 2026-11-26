@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230b5c7a%22/%3E%3Cpath d=%22M9 9h14M9 15h14M9 21h9%22 stroke=%22white%22 stroke-width=%222.6%22 stroke-linecap=%22round%22/%3E%3C/svg%3E">
+<title>메모리 반도체 브리프</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>:root{--bg:#f5f6f8;--surface:#fff;--ink:#191f28;--ink-2:#6b7684;--line:#e5e8eb;--accent:#3182f6;--accent-soft:#e8f3ff;--hot:#f04452;--hot-soft:#ffeeee;--mid:#ff9f0a;--mid-soft:#fff4e0;--tag:#f2f4f6;--f:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#101317;--surface:#1b1f25;--ink:#eceef1;--ink-2:#9aa3ad;--line:#2b3038;--accent:#5b9dff;--accent-soft:#1a2a40;--hot:#ff6b75;--hot-soft:#3a1f22;--mid:#ffb547;--mid-soft:#3a2e17;--tag:#262b33;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101317;--surface:#1b1f25;--ink:#eceef1;--ink-2:#9aa3ad;--line:#2b3038;--accent:#5b9dff;--accent-soft:#1a2a40;--hot:#ff6b75;--hot-soft:#3a1f22;--mid:#ffb547;--mid-soft:#3a2e17;--tag:#262b33;color-scheme:dark}
+
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%} body{margin:0} [hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tab{appearance:none;border:0;background:none;font:inherit;cursor:pointer;white-space:nowrap;display:flex;gap:6px;align-items:center}
+.chip{appearance:none;font:inherit;cursor:pointer}
+nav.tabs{scrollbar-width:none} nav.tabs::-webkit-scrollbar{display:none}
+.links a{text-decoration:none} .links a:hover{text-decoration:underline}
+ul.sum{margin:8px 0 0;padding-left:18px} ul.sum li{margin:2px 0}
+.empty{margin-top:32px;padding:28px;border:1px dashed var(--line);border-radius:12px;color:var(--ink-2);text-align:center}
+.note{font-size:12.5px;color:var(--hot);margin-top:8px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.75;letter-spacing:-.003em;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto;padding-block:28px 64px;display:grid;grid-template-columns:220px minmax(0,1fr);column-gap:32px;grid-template-areas:"top top" "tick tick" "side scope" "side filters" "side note" "side feed" "side foot"}
+header.top{grid-area:top;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
+.eyebrow{font-size:13px;color:var(--accent);font-weight:600}
+h1{margin:2px 0 0;font-size:26px;font-weight:800;letter-spacing:-.02em}
+.status{font-size:13px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 14px;text-align:right}
+.status b{color:var(--ink)}
+.side{grid-area:side;display:flex;flex-direction:column;gap:16px;align-self:start;position:sticky;top:16px;min-width:0}
+nav.tabs{display:flex;flex-direction:column;gap:4px;background:var(--surface);border-radius:16px;padding:10px;border:1px solid var(--line)}
+.tab{color:var(--ink-2);font-weight:600;font-size:15px;padding:11px 12px;border-radius:10px;justify-content:space-between}
+.tab:hover{background:var(--tag);color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--accent-soft);color:var(--accent)}
+.tab .n{font-size:12px;font-weight:600;background:var(--tag);color:var(--ink-2);border-radius:20px;padding:1px 8px}
+.tab[aria-selected="true"] .n{background:var(--accent);color:#fff}
+.scope{grid-area:scope;margin:0;font-size:14px;color:var(--ink-2)}
+.filters{grid-area:filters;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:12px 0 4px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.group{display:flex;gap:6px;flex-wrap:wrap;align-items:center} .group .lbl{font-size:12.5px;color:var(--ink-2);font-weight:600;margin-right:2px}
+.chip{border:0;background:var(--tag);color:var(--ink-2);font-size:13px;font-weight:500;padding:5px 12px;border-radius:8px}
+.chip:hover{color:var(--ink)} .chip[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+input#q{font:inherit;font-size:14px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);flex:1 1 200px;min-width:0;max-width:320px}
+#note{grid-area:note} main#feed{grid-area:feed;min-width:0} footer{grid-area:foot}
+.day{margin-top:24px} .day h2{display:flex;gap:8px;align-items:baseline;font-size:16px;font-weight:700;margin:0 0 10px}
+.day h2 .c{font-size:13px;font-weight:500;color:var(--ink-2)}
+.list{display:flex;flex-direction:column;gap:16px}
+article.card{background:var(--surface);border-radius:16px;padding:24px 26px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.04);display:block;min-width:0}
+.sev{display:none} .body{min-width:0}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px}
+.pill{font-weight:700;border-radius:6px;padding:2px 8px} .pill.i3{background:var(--hot-soft);color:var(--hot)} .pill.i2{background:var(--mid-soft);color:var(--mid)} .pill.i1{background:var(--tag);color:var(--ink-2)}
+.tag{background:var(--tag);color:var(--ink-2);border-radius:6px;padding:2px 8px;font-weight:500} .tag.co{background:var(--accent-soft);color:var(--accent)}
+.src{color:var(--ink-2);margin-left:auto}
+h3{font-size:19.5px;line-height:1.5;margin:12px 0 6px;font-weight:700;letter-spacing:-.01em}
+.orig{font-size:13.5px;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+ul.sum{color:var(--ink);font-size:16px;line-height:1.85;margin-top:10px;padding-left:20px}
+ul.sum li{margin:6px 0}
+ul.sum li::marker{color:var(--ink-2)}
+.imp{margin:16px 0 0;font-size:15px;line-height:1.8;background:var(--bg);border-radius:10px;padding:12px 14px}
+.imp b{color:var(--accent);margin-right:8px}
+.links{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;font-size:13px}
+.links a{color:var(--accent);font-weight:600;background:var(--accent-soft);padding:5px 10px;border-radius:8px}
+.ticker{grid-area:tick;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 18px 16px;margin-bottom:24px;min-width:0}
+.tk-head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.tk-title{font-size:14px;font-weight:700} .tk-asof{font-size:12px;color:var(--ink-2)}
+.tk-sample{font-size:12px;font-weight:700;color:var(--mid);background:var(--mid-soft);border-radius:6px;padding:2px 8px}
+.tk-groups{display:flex;flex-wrap:wrap;gap:16px 36px}
+.tk-group{flex:0 1 auto;min-width:0}
+.tk-glabel{font-size:11.5px;font-weight:700;color:var(--accent);margin-bottom:6px;letter-spacing:.02em}
+.tk-items{display:flex;flex-wrap:wrap;gap:10px 22px}
+.tk-item{min-width:96px} .tk-label{font-size:12px;color:var(--ink-2);white-space:nowrap}
+.tk-value{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:-.01em}
+.tk-unit{font-size:12px;font-weight:500;color:var(--ink-2);margin-left:2px}
+.tk-chg{font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tk-chg.up{color:var(--hot)} .tk-chg.down{color:var(--accent)} .tk-chg.flat{color:var(--ink-2)}
+.tk-date{font-size:11px;color:var(--ink-2);margin-top:1px;white-space:nowrap}
+.tk-src{font-size:11.5px;color:var(--ink-2);margin-top:10px}
+@media (max-width:600px){.tk-groups{flex-wrap:nowrap;overflow-x:auto;gap:0 28px;padding-bottom:6px;scrollbar-width:thin}.tk-group{flex:0 0 auto}.tk-items{flex-wrap:nowrap;gap:18px}.tk-item{min-width:84px}.tk-src{font-size:11px}}
+details.more{margin-top:14px;border-top:1px dashed var(--line);padding-top:10px}
+details.more summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--accent);list-style:none;display:inline-flex;gap:6px;align-items:center}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"▸";transition:transform .15s} details.more[open] summary::before{transform:rotate(90deg)}
+details.more ul{margin:10px 0 0;padding-left:20px;font-size:15.5px;line-height:1.85} details.more li{margin:5px 0}
+details.more .vf{font-size:12px;color:var(--ink-2);margin:8px 0 0}
+.cal{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 14px 10px}
+.cal h2{font-size:14px;font-weight:700;margin:0 0 8px;display:flex;justify-content:space-between;align-items:baseline}
+.cal h2 small{font-size:11.5px;font-weight:500;color:var(--ink-2)}
+.cal ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.cal li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;padding:8px 0;border-top:1px solid var(--line)}
+.cal li:first-child{border-top:0}
+.cal .dd{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.3}
+.cal .dd.today{color:var(--hot)} .cal .dd small{display:block;font-weight:500;color:var(--ink-2)}
+.cal .ev{font-size:13.5px;font-weight:600;line-height:1.4}
+.cal .ev .k{display:inline-block;font-size:11px;font-weight:700;border-radius:4px;padding:0 5px;margin-right:4px;vertical-align:1px}
+.cal .k.macro{background:var(--accent-soft);color:var(--accent)} .cal .k.earn{background:var(--hot-soft);color:var(--hot)} .cal .k.kr{background:var(--mid-soft);color:var(--mid)}
+.cal .tm{font-size:11.5px;color:var(--ink-2);font-weight:400}
+.cal .empty2{font-size:13px;color:var(--ink-2);padding:6px 0}
+footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);grid-template-areas:"top" "tick" "side" "scope" "filters" "note" "feed" "foot"}
+ .side{position:static;margin-bottom:12px;gap:12px}nav.tabs{flex-direction:row;overflow-x:auto;padding:6px}.cal li:nth-child(n+5){display:none}.tab{padding:8px 12px}.status{text-align:left}input#q{width:100%;margin-left:0}.src{margin-left:0;width:100%}article.card{padding:16px}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">개인 투자 메모 · 메모리 반도체</div>
+      <h1>메모리 반도체 브리프</h1>
+    </div>
+    <div class="status" id="status">업데이트 <b>매일 07:30 · 16:30</b><br><span id="last">불러오는 중…</span></div>
+  </header>
+
+  <section class="ticker" id="ticker" hidden aria-label="주요 지표"></section>
+
+  <div class="side">
+    <nav class="tabs" role="tablist" id="tabs"></nav>
+    <section class="cal" id="cal" hidden aria-label="다가오는 일정"></section>
+  </div>
+  <p class="scope" id="scope"></p>
+
+  <div class="filters">
+    <div class="group" id="typeGroup"><span class="lbl">구분</span></div>
+    <div class="group" id="rangeGroup"><span class="lbl">기간</span></div>
+    <div class="group" id="impGroup"><span class="lbl">중요도</span></div>
+    <div class="group" id="tkGroup"><span class="lbl">종목</span></div>
+    <input id="q" type="search" placeholder="키워드 검색 (예: HBM, 목표가)" aria-label="키워드 검색">
+  </div>
+  <div id="note" class="note" hidden></div>
+
+  <main id="feed"></main>
+
+  <footer>공개된 기사·리포트·정책 자료를 AI(Claude)가 수집해 요약한 개인 참고용 페이지입니다. 투자 권유가 아니며, 투자 판단의 책임은 본인에게 있습니다. 외신 제목과 요약은 한국어로 번역했고, 정확한 수치와 표현은 원문 링크에서 확인하세요.</footer>
+</div>
+
+<script>
+(() => {
+  const TABS = [
+    {id:"all", name:"전체", scope:"모든 주제의 이슈를 한 번에 봅니다."},
+    {id:"market", name:"업황·시장", scope:"DRAM·NAND·HBM 가격과 수급, 반도체 주가 흐름"},
+    {id:"earnings", name:"실적·가이던스", scope:"삼성전자·SK하이닉스·마이크론·구글 실적과 컨퍼런스콜 발언"},
+    {id:"ai", name:"AI 수요", scope:"구글 TPU, 빅테크 설비투자, 엔비디아 동향 등 AI 수요"},
+    {id:"policy", name:"정책·거시", scope:"수출규제, 관세, 보조금, 금리 등 정책과 거시 변수"},
+    {id:"report", name:"증권가 리포트", scope:"국내외 증권사 목표가·투자의견 변경"},
+  ];
+  const TICKERS = {all:"전체", "삼성전자":"삼성전자", "SK하이닉스":"SK하이닉스", "MU":"마이크론", "GOOGL":"구글", "SOXL":"SOXL"};
+  const TYPES = {all:"전체", domestic:"국내기사", foreign:"외신", report:"리포트", policy:"정책"};
+  const RANGES = {all:"전체", "1":"오늘", "3":"3일", "7":"7일", "30":"30일"};
+  const IMPS = {all:"전체", "3":"핵심만"};
+  const IMP_LABEL = {3:"핵심", 2:"주요", 1:"참고"};
+  const REGION = {KR:"한국", US:"미국", EU:"EU", GL:"글로벌", CN:"중국", JP:"일본", ME:"중동", IN:"인도"};
+  const CAT_NAME = Object.fromEntries(TABS.map(t => [t.id, t.name]));
+
+  const state = {tab:"all", type:"all", range:"7", imp:"all", tk:"all", q:"", items:[], loaded:false};
+  try { const s = JSON.parse(localStorage.getItem("mb-filters")||"{}"); Object.assign(state, {type:s.type||"all", range:s.range||"7", imp:s.imp||"all", tk:s.tk||"all"}); } catch(e){}
+  const save = () => { try { localStorage.setItem("mb-filters", JSON.stringify({type:state.type, range:state.range, imp:state.imp, tk:state.tk})); } catch(e){} };
+
+  const $ = s => document.querySelector(s);
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+
+  function readHash(){ const h = location.hash.replace("#",""); state.tab = TABS.some(t => t.id === h) ? h : "all"; }
+  readHash();
+  window.addEventListener("hashchange", () => { readHash(); render(); });
+
+  function chips(groupSel, dict, key){
+    const g = $(groupSel);
+    Object.entries(dict).forEach(([k, v]) => {
+      const b = el("button", "chip", v); b.type = "button"; b.dataset.k = k;
+      b.addEventListener("click", () => { state[key] = k; save(); render(); });
+      g.appendChild(b);
+    });
+  }
+  chips("#typeGroup", TYPES, "type"); chips("#rangeGroup", RANGES, "range"); chips("#impGroup", IMPS, "imp"); chips("#tkGroup", TICKERS, "tk");
+  let qt; $("#q").addEventListener("input", e => { clearTimeout(qt); qt = setTimeout(() => { state.q = e.target.value.trim().toLowerCase(); render(); }, 150); });
+
+  const todayKST = () => new Date(Date.now() + 9*3600e3).toISOString().slice(0,10);
+  const daysAgo = d => { const t = new Date(todayKST()+"T00:00:00Z"); t.setUTCDate(t.getUTCDate() - (Number(d)-1)); return t.toISOString().slice(0,10); };
+  const fmtDay = iso => { const d = new Date(iso+"T00:00:00Z"); const w = "일월화수목금토"[d.getUTCDay()]; return `${iso.slice(5,7)}.${iso.slice(8,10)} (${w})`; };
+  const safeUrl = u => (typeof u === "string" && u.startsWith("https://")) ? u : null;
+
+  function filtered(ignoreTab){
+    const from = state.range === "all" ? "" : daysAgo(state.range);
+    return state.items.filter(it =>
+      (ignoreTab || state.tab === "all" || it.category === state.tab) &&
+      (state.type === "all" || it.type === state.type) &&
+      (state.imp === "all" || Number(it.importance) >= Number(state.imp)) &&
+      (state.tk === "all" || (Array.isArray(it.tickers) && it.tickers.includes(state.tk))) &&
+      (!from || (it.date||"") >= from) &&
+      (!state.q || [it.title, it.originalTitle, it.source, it.impact || it.implication, ...(it.summary||[])].join(" ").toLowerCase().includes(state.q))
+    );
+  }
+
+  function renderTabs(){
+    const nav = $("#tabs"); nav.textContent = "";
+    const base = filtered(true);
+    TABS.forEach(t => {
+      const b = el("button", "tab"); b.type = "button"; b.setAttribute("role","tab");
+      b.setAttribute("aria-selected", String(state.tab === t.id));
+      b.appendChild(el("span", null, t.name));
+      const n = t.id === "all" ? base.length : base.filter(i => i.category === t.id).length;
+      b.appendChild(el("span", "n", String(n)));
+      b.addEventListener("click", () => { location.hash = t.id; });
+      nav.appendChild(b);
+    });
+    $("#scope").textContent = TABS.find(t => t.id === state.tab).scope;
+    document.querySelectorAll(".chip").forEach(c => {
+      const key = {typeGroup:"type", rangeGroup:"range", impGroup:"imp", tkGroup:"tk"}[c.parentElement.id];
+      c.setAttribute("aria-pressed", String(state[key] === c.dataset.k));
+    });
+  }
+
+  function card(it){
+    const imp = Number(it.importance) || 1;
+    const a = el("article", `card i${imp}`);
+    a.appendChild(el("div", "sev"));
+    const b = el("div", "body");
+    const m = el("div", "meta");
+    m.appendChild(el("span", `pill i${imp}`, IMP_LABEL[imp] || "참고"));
+    m.appendChild(el("span", "tag", TYPES[it.type] || it.type || ""));
+    if (it.region) m.appendChild(el("span", "tag", REGION[it.region] || it.region));
+    if (state.tab === "all" && it.category) m.appendChild(el("span", "tag", CAT_NAME[it.category] || it.category));
+    (Array.isArray(it.tickers) ? it.tickers : []).forEach(t => m.appendChild(el("span", "tag co", TICKERS[t] || t)));
+    m.appendChild(el("span", "src", [it.source, it.date].filter(Boolean).join(" · ")));
+    b.appendChild(m);
+    b.appendChild(el("h3", null, it.title || ""));
+    if (it.originalTitle) b.appendChild(el("p", "orig", "원제: " + it.originalTitle));
+    if (Array.isArray(it.summary) && it.summary.length){
+      const ul = el("ul", "sum"); it.summary.forEach(s => ul.appendChild(el("li", null, String(s)))); b.appendChild(ul);
+    }
+    const impact = it.impact || it.implication;
+    if (impact){
+      const p = el("p", "imp"); p.appendChild(el("b", null, "체크 포인트")); p.appendChild(document.createTextNode(impact)); b.appendChild(p);
+    }
+    if (Array.isArray(it.detail) && it.detail.length){
+      const d = el("details", "more"); d.appendChild(el("summary", null, "자세히 보기"));
+      const ul = el("ul"); it.detail.forEach(x => ul.appendChild(el("li", null, String(x)))); d.appendChild(ul);
+      d.appendChild(el("p", "vf", it.verified ? "원문 확인 후 작성" : "검색으로 확인한 기사 내용을 바탕으로 작성"));
+      b.appendChild(d);
+    }
+    const links = el("div", "links");
+    const u = safeUrl(it.url);
+    if (u){ const l = el("a", null, "원문 보기 ↗"); l.href = u; l.target = "_blank"; l.rel = "noopener noreferrer"; links.appendChild(l); }
+    (Array.isArray(it.extraLinks) ? it.extraLinks : []).forEach(x => { const xu = safeUrl(x && x.url); if (xu){ const l = el("a", null, (x.label||"관련 자료") + " ↗"); l.href = xu; l.target="_blank"; l.rel="noopener noreferrer"; links.appendChild(l);} });
+    if (links.childNodes.length) b.appendChild(links);
+    a.appendChild(b);
+    return a;
+  }
+
+  function render(){
+    renderTabs();
+    const feed = $("#feed"); feed.textContent = "";
+    if (!state.loaded){ feed.appendChild(el("div","empty","이슈를 불러오는 중입니다…")); return; }
+    if (!state.items.length){ feed.appendChild(el("div","empty","아직 수집된 이슈가 없습니다. 평일 08:00과 15:00에 새 이슈가 자동으로 추가됩니다.")); return; }
+    const list = filtered(false).sort((x,y) => (y.date||"").localeCompare(x.date||"") || (Number(y.importance)||0)-(Number(x.importance)||0) || (y.addedAt||"").localeCompare(x.addedAt||""));
+    if (!list.length){
+      const box = el("div","empty","선택한 기간에는 이 탭의 새 이슈가 없습니다. ");
+      if (state.range !== "30" && state.range !== "all"){ const b = el("button","chip","최근 30일 보기"); b.type="button"; b.addEventListener("click",()=>{state.range="30"; save(); render();}); box.appendChild(b); }
+      feed.appendChild(box); return;
+    }
+    const byDay = new Map(); list.forEach(it => { const d = it.date || "날짜 미상"; if (!byDay.has(d)) byDay.set(d, []); byDay.get(d).push(it); });
+    byDay.forEach((items, d) => {
+      const sec = el("section","day"); const h = el("h2");
+      h.appendChild(el("span","d", d.length === 10 ? fmtDay(d) : d)); h.appendChild(el("span","c", `${items.length}건`));
+      sec.appendChild(h); const l = el("div","list"); items.forEach(it => l.appendChild(card(it))); sec.appendChild(l); feed.appendChild(sec);
+    });
+  }
+  render();
+
+  const DATA = document.documentElement.dataset;
+  const ISSUES_URL = DATA.issues || "data/issues.json", META_URL = DATA.meta || "data/meta.json", IND_URL = DATA.indicators || "data/indicators.json", CAL_URL = DATA.calendar || "data/calendar.json";
+  const KIND = {macro:"거시", earn:"실적", kr:"국내"};
+  function renderCal(list){
+    const box = $("#cal"); box.textContent = "";
+    const today = todayKST();
+    const up = (Array.isArray(list) ? list : []).filter(e => (e.date||"") >= today).sort((a,b) => (a.date+(a.time||"")).localeCompare(b.date+(b.time||""))).slice(0, 10);
+    const h = el("h2"); h.appendChild(el("span", null, "다가오는 일정")); h.appendChild(el("small", null, "한국시간")); box.appendChild(h);
+    if (!up.length){ box.appendChild(el("div","empty2","예정된 일정이 없습니다.")); box.hidden = false; return; }
+    const ul = el("ul");
+    up.forEach(e => {
+      const li = el("li");
+      const d = new Date(e.date+"T00:00:00Z"), t = new Date(today+"T00:00:00Z"); const diff = Math.round((d - t)/864e5);
+      const dd = el("div", "dd" + (diff === 0 ? " today" : ""), e.date.slice(5).replace("-", "."));
+      dd.appendChild(el("small", null, diff === 0 ? "오늘" : "D-" + diff)); li.appendChild(dd);
+      const ev = el("div", "ev"); const k = el("span", "k " + (e.kind || "macro"), KIND[e.kind] || "일정"); ev.appendChild(k); ev.appendChild(document.createTextNode(e.title || ""));
+      const tm = [e.time, e.note].filter(Boolean).join(" · "); if (tm){ ev.appendChild(document.createElement("br")); ev.appendChild(el("span", "tm", tm)); }
+      li.appendChild(ev); ul.appendChild(li);
+    });
+    box.appendChild(ul); box.hidden = false;
+  }
+  function renderTicker(ind){
+    const box = $("#ticker"); box.textContent = "";
+    const items = ind && Array.isArray(ind.items) ? ind.items : [];
+    if (!items.length){ box.hidden = true; return; }
+    const head = el("div","tk-head"); const left = el("div"); left.style.display="flex"; left.style.gap="8px"; left.style.alignItems="baseline";
+    left.appendChild(el("span","tk-title","주요 지표"));
+    if (ind.sample) left.appendChild(el("span","tk-sample","예시 수치 · 실제 값 아님"));
+    head.appendChild(left); head.appendChild(el("span","tk-asof", ind.asOf ? "수집 " + ind.asOf : "")); box.appendChild(head);
+    const groups = el("div","tk-groups"); const order = []; const map = {};
+    items.forEach(it => { const g = it.group || "기타"; if (!map[g]){ map[g] = []; order.push(g); } map[g].push(it); });
+    order.forEach(g => {
+      const gd = el("div","tk-group"); gd.appendChild(el("div","tk-glabel", g)); const row = el("div","tk-items");
+      map[g].forEach(it => {
+        const c = el("div","tk-item"); c.title = [it.asOf && ("기준 " + it.asOf), it.source && ("출처 " + it.source)].filter(Boolean).join(" · ");
+        c.appendChild(el("div","tk-label", it.label || ""));
+        const v = el("div","tk-value", it.value != null ? String(it.value) : "–"); if (it.unit) v.appendChild(el("span","tk-unit", it.unit)); c.appendChild(v);
+        const dir = it.dir === "up" ? "up" : it.dir === "down" ? "down" : "flat";
+        c.appendChild(el("div","tk-chg " + dir, (dir === "up" ? "▲ " : dir === "down" ? "▼ " : "– ") + (it.change || "보합")));
+        if (it.asOf) c.appendChild(el("div","tk-date", it.asOf));
+        row.appendChild(c);
+      });
+      gd.appendChild(row); groups.appendChild(gd);
+    });
+    box.appendChild(groups);
+    const srcs = [...new Set(items.map(i => i.source).filter(Boolean))];
+    if (srcs.length) box.appendChild(el("div","tk-src", "출처: " + srcs.join(", ") + " · 각 수치 아래 날짜는 기준일, 변동은 직전 발표 대비 · 하루 두 번 갱신되는 참고용 수치"));
+    box.hidden = false;
+  }
+
+  (async () => {
+    const note = $("#note");
+    try {
+      const v = "?t=" + Math.floor(Date.now()/60000);
+      fetch(IND_URL+v, {cache:"no-store"}).then(r => r.ok ? r.json() : null).then(renderTicker).catch(() => {});
+      fetch(CAL_URL+v, {cache:"no-store"}).then(r => r.ok ? r.json() : null).then(renderCal).catch(() => {});
+      const [ir, mr] = await Promise.all([fetch(ISSUES_URL+v, {cache:"no-store"}), fetch(META_URL+v, {cache:"no-store"})]);
+      if (!ir.ok) throw new Error("HTTP " + ir.status);
+      const items = await ir.json();
+      state.items = Array.isArray(items) ? items : [];
+      try { const m = mr.ok ? await mr.json() : null; $("#last").textContent = m && m.lastUpdated ? "최근 갱신 " + m.lastUpdated : "최근 갱신 기록 없음"; } catch(e){ $("#last").textContent = ""; }
+    } catch (e) {
+      note.hidden = false; note.textContent = "이슈 데이터를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.";
+      $("#last").textContent = "";
+    }
+    state.loaded = true; render();
+  })();
+})();
+</script>
+</body>
+</html>
