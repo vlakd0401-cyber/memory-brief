@@ -254,7 +254,7 @@ footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
     renderTabs();
     const feed = $("#feed"); feed.textContent = "";
     if (!state.loaded){ feed.appendChild(el("div","empty","이슈를 불러오는 중입니다…")); return; }
-    if (!state.items.length){ feed.appendChild(el("div","empty","아직 수집된 이슈가 없습니다. 평일 08:00과 15:00에 새 이슈가 자동으로 추가됩니다.")); return; }
+    if (!state.items.length){ feed.appendChild(el("div","empty","아직 수집된 이슈가 없습니다. 정해진 갱신 시각에 새 이슈가 자동으로 추가됩니다.")); return; }
     const list = filtered(false).sort((x,y) => (y.date||"").localeCompare(x.date||"") || (Number(y.importance)||0)-(Number(x.importance)||0) || (y.addedAt||"").localeCompare(x.addedAt||""));
     if (!list.length){
       const box = el("div","empty","선택한 기간에는 이 탭의 새 이슈가 없습니다. ");
