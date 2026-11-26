@@ -26,7 +26,7 @@ ul.sum{margin:8px 0 0;padding-left:18px} ul.sum li{margin:2px 0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
 body{background:var(--bg);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.75;letter-spacing:-.003em;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.wrap{max-width:1180px;margin:0 auto;padding-block:28px 64px;display:grid;grid-template-columns:220px minmax(0,1fr);column-gap:32px;grid-template-areas:"top top" "tick tick" "side scope" "side filters" "side note" "side feed" "side foot"}
+.wrap{max-width:1180px;margin:0 auto;padding-block:28px 64px;display:grid;grid-template-columns:220px minmax(0,1fr);column-gap:32px;grid-template-areas:"top top" "tick tick" "side scope" "side filters" "side note" "side feed" "side foot";grid-template-rows:repeat(6,auto) 1fr}
 header.top{grid-area:top;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
 .eyebrow{font-size:13px;color:var(--accent);font-weight:600}
 h1{margin:2px 0 0;font-size:26px;font-weight:800;letter-spacing:-.02em}
@@ -105,7 +105,7 @@ details.more .vf{font-size:12px;color:var(--ink-2);margin:8px 0 0}
 .cal .tm{font-size:11.5px;color:var(--ink-2);font-weight:400}
 .cal .empty2{font-size:13px;color:var(--ink-2);padding:6px 0}
 footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
-@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);grid-template-areas:"top" "tick" "side" "scope" "filters" "note" "feed" "foot"}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"top" "tick" "side" "scope" "filters" "note" "feed" "foot"}
  .side{position:static;margin-bottom:12px;gap:12px}nav.tabs{flex-direction:row;overflow-x:auto;padding:6px}.cal li:nth-child(n+5){display:none}.tab{padding:8px 12px}.status{text-align:left}input#q{width:100%;margin-left:0}.src{margin-left:0;width:100%}article.card{padding:16px}}
 </style>
 </head>
