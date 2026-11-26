@@ -123,10 +123,10 @@
    "label": "원/달러",
    "value": "1,343.4",
    "unit": "원",
-   "change": "3.0원",
-   "dir": "down",
+   "change": "0.2원",
+   "dir": "up",
    "asOf": "11/26 22:40",
-   "source": "한국수출입은행",
+   "source": "Yahoo Finance",
    "sym": "KRW=X"
   },
   {
