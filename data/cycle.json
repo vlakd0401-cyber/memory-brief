@@ -1,0 +1,511 @@
+{
+ "history": {
+  "삼성전자": [
+   {
+    "date": "2026-11-27",
+    "target": 458182.0,
+    "feps": 45515.0,
+    "pbr": 1.92,
+    "foreignRate": 45.84
+   }
+  ],
+  "SK하이닉스": [
+   {
+    "date": "2026-11-27",
+    "target": 2929091.0,
+    "feps": 354118.0,
+    "pbr": 2.53,
+    "foreignRate": 49.23
+   }
+  ],
+  "spot": [
+   {
+    "date": "2026-11-27",
+    "DDR5 16Gb": 60.767,
+    "DDR4 16Gb": 77.375,
+    "DDR4 8Gb": 43.018,
+    "NAND 512Gb TLC": 14.238
+   }
+  ]
+ },
+ "auto": {
+  "position": [
+   {
+    "name": "삼성전자",
+    "sym": "005930.KS",
+    "unit": "원",
+    "price": 177500.0,
+    "peak": 362500.0,
+    "peakDate": "2026-06-18",
+    "drawdown": -51.0,
+    "daysFromPeak": 162,
+    "past": [
+     {
+      "label": "2018~19년",
+      "drawdown": -33.6,
+      "peakDate": "2017-11-06",
+      "troughDate": "2018-12-31",
+      "months": 14
+     },
+     {
+      "label": "2021~23년",
+      "drawdown": -40.2,
+      "peakDate": "2021-01-04",
+      "troughDate": "2022-09-26",
+      "months": 21
+     }
+    ]
+   },
+   {
+    "name": "SK하이닉스",
+    "sym": "000660.KS",
+    "unit": "원",
+    "price": 1091000.0,
+    "peak": 2919000.0,
+    "peakDate": "2026-06-22",
+    "drawdown": -62.6,
+    "daysFromPeak": 158,
+    "past": [
+     {
+      "label": "2018~19년",
+      "drawdown": -38.8,
+      "peakDate": "2018-05-21",
+      "troughDate": "2018-12-31",
+      "months": 7
+     },
+     {
+      "label": "2021~23년",
+      "drawdown": -47.0,
+      "peakDate": "2021-02-22",
+      "troughDate": "2022-12-26",
+      "months": 22
+     }
+    ]
+   },
+   {
+    "name": "마이크론",
+    "sym": "MU",
+    "unit": "$",
+    "price": 601.25,
+    "peak": 1213.56,
+    "peakDate": "2026-06-25",
+    "drawdown": -50.5,
+    "daysFromPeak": 155,
+    "past": [
+     {
+      "label": "2018~19년",
+      "drawdown": -50.6,
+      "peakDate": "2018-06-04",
+      "troughDate": "2018-12-17",
+      "months": 6
+     },
+     {
+      "label": "2021~23년",
+      "drawdown": -48.7,
+      "peakDate": "2022-01-10",
+      "troughDate": "2022-12-26",
+      "months": 12
+     }
+    ]
+   }
+  ],
+  "valuation": {
+   "삼성전자": {
+    "per": 5.61,
+    "fper": 3.92,
+    "pbr": 1.92,
+    "bps": 92903.0,
+    "eps": 31809.0,
+    "feps": 45515.0,
+    "divYield": 3.45,
+    "foreignRate": 45.84,
+    "high52": 380000.0,
+    "low52": 99900.0,
+    "annual": [
+     {
+      "year": "2023",
+      "pbr": 1.51,
+      "bps": 52002.0,
+      "estimate": false
+     },
+     {
+      "year": "2024",
+      "pbr": 0.92,
+      "bps": 57981.0,
+      "estimate": false
+     },
+     {
+      "year": "2025",
+      "pbr": 1.87,
+      "bps": 63997.0,
+      "estimate": false
+     },
+     {
+      "year": "2026",
+      "pbr": 1.58,
+      "bps": 108332.0,
+      "estimate": true
+     }
+    ]
+   },
+   "SK하이닉스": {
+    "per": 4.2,
+    "fper": 3.1,
+    "pbr": 2.53,
+    "bps": 433826.0,
+    "eps": 261625.0,
+    "feps": 354118.0,
+    "divYield": 0.29,
+    "foreignRate": 49.23,
+    "high52": 3002000.0,
+    "low52": 525000.0,
+    "annual": [
+     {
+      "year": "2023",
+      "pbr": 1.82,
+      "bps": 77752.0,
+      "estimate": false
+     },
+     {
+      "year": "2024",
+      "pbr": 1.62,
+      "bps": 107256.0,
+      "estimate": false
+     },
+     {
+      "year": "2025",
+      "pbr": 3.79,
+      "bps": 171751.0,
+      "estimate": false
+     },
+     {
+      "year": "2026",
+      "pbr": 1.91,
+      "bps": 551907.0,
+      "estimate": true
+     }
+    ]
+   }
+  },
+  "flows": {
+   "삼성전자": [
+    {
+     "date": "11/26",
+     "foreign": -537801.0,
+     "organ": 1862261.0,
+     "individual": -1312723.0,
+     "foreignHold": 45.84
+    },
+    {
+     "date": "11/25",
+     "foreign": -5763083.0,
+     "organ": -948317.0,
+     "individual": 6534711.0,
+     "foreignHold": 45.84
+    },
+    {
+     "date": "11/24",
+     "foreign": 2348072.0,
+     "organ": 1176494.0,
+     "individual": -3400633.0,
+     "foreignHold": 45.9
+    },
+    {
+     "date": "11/23",
+     "foreign": -45179.0,
+     "organ": 661271.0,
+     "individual": -673869.0,
+     "foreignHold": 45.85
+    },
+    {
+     "date": "11/20",
+     "foreign": -2299994.0,
+     "organ": -1915397.0,
+     "individual": 4051865.0,
+     "foreignHold": 45.85
+    }
+   ],
+   "SK하이닉스": [
+    {
+     "date": "11/26",
+     "foreign": 296355.0,
+     "organ": -67805.0,
+     "individual": -567841.0,
+     "foreignHold": 49.23
+    },
+    {
+     "date": "11/25",
+     "foreign": -496448.0,
+     "organ": -13339.0,
+     "individual": 152556.0,
+     "foreignHold": 49.25
+    },
+    {
+     "date": "11/24",
+     "foreign": -118990.0,
+     "organ": -844.0,
+     "individual": -233523.0,
+     "foreignHold": 49.32
+    },
+    {
+     "date": "11/23",
+     "foreign": -168180.0,
+     "organ": -27323.0,
+     "individual": -156696.0,
+     "foreignHold": 49.34
+    },
+    {
+     "date": "11/20",
+     "foreign": -167982.0,
+     "organ": -235664.0,
+     "individual": 46433.0,
+     "foreignHold": 49.38
+    }
+   ]
+  },
+  "consensus": {
+   "삼성전자": {
+    "target": 458182.0,
+    "recomm": 4.0,
+    "date": "2026-11-26"
+   },
+   "SK하이닉스": {
+    "target": 2929091.0,
+    "recomm": 4.0,
+    "date": "2026-11-26"
+   }
+  },
+  "spot": {
+   "items": [
+    {
+     "label": "DDR5 16Gb",
+     "avg": 60.767,
+     "chg": 0.0
+    },
+    {
+     "label": "DDR4 16Gb",
+     "avg": 77.375,
+     "chg": -0.16
+    },
+    {
+     "label": "DDR4 8Gb",
+     "avg": 43.018,
+     "chg": -0.25
+    },
+    {
+     "label": "NAND 512Gb TLC",
+     "avg": 14.238,
+     "chg": -0.2
+    }
+   ],
+   "asOf": "11/27 11:00 (대만시간)"
+  },
+  "taiwan": [
+   {
+    "name": "난야(南亞科)",
+    "month": "2026-10",
+    "revenue": 464.8,
+    "mom": 3.1,
+    "yoy": 487.7
+   },
+   {
+    "name": "윈본드(華邦電)",
+    "month": "2026-10",
+    "revenue": 293.6,
+    "mom": 3.9,
+    "yoy": 257.0
+   },
+   {
+    "name": "매크로닉스(旺宏)",
+    "month": "2026-10",
+    "revenue": 84.1,
+    "mom": 0.6,
+    "yoy": 217.2
+   }
+  ],
+  "updated": "2026-11-27 14:18"
+ },
+ "manual": {
+  "updated": "2026-11-27 12:40",
+  "bull": [
+   "고점 대비 낙폭이 이미 과거 두 차례 하락 사이클 최대 낙폭보다 큼(삼성전자 -51%, SK하이닉스 -63%, 마이크론 -50%)",
+   "HBM 물량은 2027년분 상당 부분이 장기계약으로 묶였다는 회사·증권가 발언(마이크론 '2027년 HBM 대부분 계약', 씨티 '마이크론 2027년 생산량 75% 이상 계약')",
+   "실적 지표는 아직 정점 신호가 약함: 11월 1~20일 반도체 수출 +294%, 대만 난야·윈본드 10월 매출 전월 대비 증가",
+   "수요처 투자 확대 지속: 알파벳 2026년 설비투자 1,950억~2,050억달러로 상향, 2027년 추가 증가 예고"
+  ],
+  "bear": [
+   "증권가 목표가 줄하향과 '2028년 가격 하락' 전망(골드만삭스: 2028년 범용 D램 -19%, 낸드 -21%)",
+   "범용 가격 상승세 둔화가 수치로 확인: 낸드 현물가가 계약가보다 20% 이상 낮고, 4분기 낸드 계약가 상승률 전망 하향(15~20%→8~13%)",
+   "공급 증가 우려: 메모리 3사 HBM·범용 증설이 2027년 하반기부터 반영되면 수급이 예상보다 빨리 균형에 가까워질 수 있다는 분석(BNP파리바)",
+   "AI 투자 회의론과 데이터센터 규제 우려로 반도체주 변동성이 큼(SOX 11월 하루 -12%, -10.7% 급락 기록)"
+  ],
+  "consensus": {
+   "notes": [
+    "네이버 컨센서스(FnGuide 평균)는 개별 증권사의 최근 하향을 늦게 반영할 수 있어, 아래 개별 변경 내역과 함께 봅니다.",
+    "바닥 신호로 자주 거론되는 것: 하향 건수가 줄고 추정 이익 하향 폭이 작아지는 시점"
+   ],
+   "changes": [
+    {
+     "date": "11/22",
+     "broker": "골드만삭스",
+     "ticker": "삼성전자",
+     "from": "50만",
+     "to": "35만",
+     "opinion": "매수 유지"
+    },
+    {
+     "date": "11/22",
+     "broker": "골드만삭스",
+     "ticker": "SK하이닉스",
+     "from": "350만",
+     "to": "200만",
+     "opinion": "매수 유지"
+    },
+    {
+     "date": "11/20",
+     "broker": "BNK투자증권",
+     "ticker": "SK하이닉스",
+     "from": "165만",
+     "to": "105만",
+     "opinion": "-"
+    },
+    {
+     "date": "11/17",
+     "broker": "키움증권",
+     "ticker": "삼성전자",
+     "from": "35만",
+     "to": "29만",
+     "opinion": "업종 최선호 유지"
+    },
+    {
+     "date": "11/17",
+     "broker": "키움증권",
+     "ticker": "SK하이닉스",
+     "from": "210만",
+     "to": "180만",
+     "opinion": "업종 최선호 유지"
+    },
+    {
+     "date": "11/9",
+     "broker": "모건스탠리",
+     "ticker": "삼성전자",
+     "from": "38.1만",
+     "to": "30.9만",
+     "opinion": "매수 유지"
+    },
+    {
+     "date": "11/9",
+     "broker": "모건스탠리",
+     "ticker": "SK하이닉스",
+     "from": "260만",
+     "to": "160만",
+     "opinion": "매수 유지"
+    },
+    {
+     "date": "11월",
+     "broker": "BNP파리바 엑산",
+     "ticker": "마이크론",
+     "from": "$1,700",
+     "to": "$775",
+     "opinion": "시장수익률 상회→중립"
+    }
+   ],
+   "tally": "11월 확인된 목표가 변경: 하향 8건, 상향 0건(삼성전자 3·SK하이닉스 4·마이크론 1). 투자의견은 대부분 '매수' 유지"
+  },
+  "contract": [
+   {
+    "label": "범용 D램 계약가 4분기",
+    "value": "+10~15% (전 분기 대비)",
+    "note": "트렌드포스 11/25 전망. 내년 상승 전망치는 하향",
+    "source": "TrendForce",
+    "url": "https://www.trendforce.com/news/2026/11/18/insights-memory-spot-price-update-nand-spot-contract-price-gap-exceeds-20-amid-weak-demand"
+   },
+   {
+    "label": "낸드 계약가 4분기",
+    "value": "+8~13%",
+    "note": "기존 15~20%에서 하향. 2027년 1분기 0~5% 하락, 2분기부터 하락 사이클 진입 전망",
+    "source": "TrendForce",
+    "url": "https://www.trendforce.com/news/2026/11/18/insights-memory-spot-price-update-nand-spot-contract-price-gap-exceeds-20-amid-weak-demand"
+   },
+   {
+    "label": "BofA D램 가격 전망",
+    "value": "4Q +8%, 2027년 1Q +5%",
+    "note": "상승률 둔화이지 하락 전환은 아님",
+    "source": "디지털투데이",
+    "url": "https://www.digitaltoday.co.kr/en/view/130658/nand-spot-prices-plunge-20-percent-dram-holds-up-memory-market-polarisation-seen-in-2027"
+   },
+   {
+    "label": "골드만삭스 2028년 전망",
+    "value": "범용 D램 -19%, 낸드 -21%",
+    "note": "기존 -5%, -14%에서 하향",
+    "source": "데일리25",
+    "url": "https://www.daily25news.com/news/articleView.html?idxno=9478"
+   }
+  ],
+  "exports": [
+   {
+    "label": "반도체 수출 11월 1~20일",
+    "value": "385억달러 (+294.4%)",
+    "note": "같은 기간 기준 역대 최대(관세청)",
+    "source": "딜사이트",
+    "url": "https://dealsite.co.kr/articles/173654"
+   }
+  ],
+  "demand": [
+   {
+    "text": "알파벳 2026년 설비투자 가이던스 1,950억~2,050억달러로 상향, 2027년 더 크게 증가 예고. 구글 클라우드 매출 +103%",
+    "source": "FX Leaders",
+    "url": "https://fxleaders.com/news/2026/11/25/alphabet-stock-goog-breaks-key-270-support-as-tiger-global-cuts-ai-spending-and-competition-weigh-on-google"
+   },
+   {
+    "text": "엔비디아 공급 약정액 급증, 증가분 대부분이 메모리 다년 구매계약",
+    "source": "파이낸셜뉴스",
+    "url": "https://www.fnnews.com/news/202611181452113938"
+   },
+   {
+    "text": "궈밍치: 구글이 2027년 TPU-8i 생산을 약 100만 개 줄일 것으로 예상(회사 미확인)",
+    "source": "FX Leaders",
+    "url": "https://fxleaders.com/news/2026/11/25/alphabet-stock-goog-breaks-key-270-support-as-tiger-global-cuts-ai-spending-and-competition-weigh-on-google"
+   }
+  ],
+  "supply": [
+   {
+    "text": "SK하이닉스 HBM4 장비 추가 발주 논의, 내년 상반기 반입 목표",
+    "source": "파이낸셜뉴스",
+    "url": "https://www.fnnews.com/news/202611161601369417"
+   },
+   {
+    "text": "BNP파리바: D램·낸드 수급이 2027년 중반부터 균형에 가까워질 수 있음(기존 예상 2028년 중반)",
+    "source": "GuruFocus",
+    "url": "https://www.gurufocus.com/news/9219604/micron-technology-mu-faces-major-stock-decline-amid-2028-profit-cliff-concerns"
+   },
+   {
+    "text": "중국 추격: 화웨이 HBM(데이터 핀 밀도 2배) 2월 학회 공개 예정, YMTC는 하이브리드 본딩 특허로 삼성·SK와 크로스 라이선스",
+    "source": "한국일보",
+    "url": "https://www.hankookilbo.com/news/article/A2026112615310005832"
+   }
+  ],
+  "events": [
+   {
+    "date": "2026-12-01",
+    "title": "한국 11월 수출입 동향",
+    "why": "반도체 수출 금액·단가"
+   },
+   {
+    "date": "2026-12-10",
+    "title": "대만 메모리 업체 11월 매출(전후)",
+    "why": "난야·윈본드 월매출 방향"
+   },
+   {
+    "date": "2026-12-18",
+    "title": "마이크론 FY27 1분기 실적(한국시간 06:30)",
+    "why": "2027~28년 계약 물량·가격 언급이 '이익 절벽' 논쟁의 분기점"
+   },
+   {
+    "date": "2026-12-31",
+    "title": "트렌드포스 1분기 계약가 전망(12월 말 전후)",
+    "why": "2027년 1분기 D램·낸드 계약가 방향"
+   }
+  ]
+ }
+}

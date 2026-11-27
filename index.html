@@ -104,6 +104,35 @@ details.more .vf{font-size:12px;color:var(--ink-2);margin:8px 0 0}
 .cal .k.macro{background:var(--accent-soft);color:var(--accent)} .cal .k.earn{background:var(--hot-soft);color:var(--hot)} .cal .k.kr{background:var(--mid-soft);color:var(--mid)}
 .cal .tm{font-size:11.5px;color:var(--ink-2);font-weight:400}
 .cal .empty2{font-size:13px;color:var(--ink-2);padding:6px 0}
+.cy{display:flex;flex-direction:column;gap:16px;margin-top:12px}
+.cy-sec{background:var(--surface);border-radius:16px;padding:22px 24px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.04);min-width:0}
+.cy-sec h2{font-size:17px;font-weight:800;margin:0;letter-spacing:-.01em}
+.cy-sec .q{font-size:13.5px;color:var(--ink-2);margin:2px 0 14px}
+.cy-head{background:var(--accent-soft);border-radius:14px;padding:12px 16px;font-size:13.5px;line-height:1.65;color:var(--ink)}
+.cy-head b{color:var(--accent)}
+.cy-two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cy-col{border-radius:12px;padding:14px 16px;background:var(--bg)}
+.cy-col h3{font-size:14.5px;margin:0 0 6px} .cy-col.bull h3{color:var(--hot)} .cy-col.bear h3{color:var(--accent)}
+.cy-col ul{margin:0;padding-left:18px;font-size:14.5px;line-height:1.75} .cy-col li{margin:5px 0}
+.cy-tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.cy-t{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.cy-t th{font-size:12px;font-weight:600;color:var(--ink-2);text-align:right;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.cy-t td{text-align:right;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.cy-t th:first-child,.cy-t td:first-child{text-align:left}
+.cy-t td.l{text-align:left;white-space:normal} .cy-t tr:last-child td{border-bottom:0}
+.up{color:var(--hot)} .down{color:var(--accent)}
+.cy-bar{margin:14px 0 4px} .cy-bar .nm{font-size:14px;font-weight:700;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.cy-bar .nm small{font-weight:500;color:var(--ink-2);font-size:12.5px}
+.cy-row{display:grid;grid-template-columns:128px minmax(0,1fr) 58px;gap:8px;align-items:center;font-size:12.5px;margin-top:5px}
+.cy-row .lb{color:var(--ink-2)} .cy-row .v{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.cy-track{height:10px;background:var(--tag);border-radius:6px;overflow:hidden}
+.cy-fill{height:100%;border-radius:6px;background:var(--ink-2)} .cy-row.now .cy-fill{background:var(--hot)} .cy-row.now .v{color:var(--hot)}
+.cy-note{font-size:12.5px;color:var(--ink-2);margin:10px 0 0;line-height:1.65}
+.cy-list{margin:0;padding-left:18px;font-size:14.5px;line-height:1.75} .cy-list li{margin:5px 0}
+.cy-list a,.cy-t a{color:var(--accent);font-weight:600;text-decoration:none;font-size:12.5px;margin-left:4px}
+.cy-sub{font-size:14px;font-weight:700;margin:18px 0 6px}
+.cy-tally{font-size:14px;font-weight:600;background:var(--bg);border-radius:10px;padding:10px 12px;margin-bottom:10px}
+@media (max-width:700px){.cy-two{grid-template-columns:1fr}.cy-sec{padding:16px}.cy-row{grid-template-columns:112px minmax(0,1fr) 52px}}
 footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
 @media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"top" "tick" "side" "scope" "filters" "note" "feed" "foot"}
  .side{position:static;margin-bottom:12px;gap:12px}nav.tabs{flex-direction:row;overflow-x:auto;padding:6px}.cal li:nth-child(n+5){display:none}.tab{padding:8px 12px}.status{text-align:left}input#q{width:100%;margin-left:0}.src{margin-left:0;width:100%}article.card{padding:16px}}
@@ -151,6 +180,7 @@ footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
     {id:"ai", name:"AI 수요", scope:"구글 TPU, 빅테크 설비투자, 엔비디아 동향 등 AI 수요"},
     {id:"policy", name:"정책·거시", scope:"수출규제, 관세, 보조금, 금리 등 정책과 거시 변수"},
     {id:"report", name:"증권가 리포트", scope:"국내외 증권사 목표가·투자의견 변경"},
+    {id:"cycle", name:"사이클 점검", scope:"주가가 이미 얼마나 반영했는지, 시장 기대·수급·선행 지표가 어느 쪽을 가리키는지 한곳에 모았습니다. 매매 권유가 아니라 판단 근거를 정리한 것입니다.", special:true},
   ];
   const TICKERS = {all:"전체", "삼성전자":"삼성전자", "SK하이닉스":"SK하이닉스", "MU":"마이크론", "GOOGL":"구글", "SOXL":"SOXL"};
   const TYPES = {all:"전체", domestic:"국내기사", foreign:"외신", report:"리포트", policy:"정책"};
@@ -206,8 +236,7 @@ footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
       const b = el("button", "tab"); b.type = "button"; b.setAttribute("role","tab");
       b.setAttribute("aria-selected", String(state.tab === t.id));
       b.appendChild(el("span", null, t.name));
-      const n = t.id === "all" ? base.length : base.filter(i => i.category === t.id).length;
-      b.appendChild(el("span", "n", String(n)));
+      if (!t.special){ const n = t.id === "all" ? base.length : base.filter(i => i.category === t.id).length; b.appendChild(el("span", "n", String(n))); }
       b.addEventListener("click", () => { location.hash = t.id; });
       nav.appendChild(b);
     });
@@ -258,6 +287,8 @@ footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
   function render(){
     renderTabs();
     const feed = $("#feed"); feed.textContent = "";
+    $(".filters").hidden = state.tab === "cycle";
+    if (state.tab === "cycle"){ renderCycle(feed); return; }
     if (!state.loaded){ feed.appendChild(el("div","empty","이슈를 불러오는 중입니다…")); return; }
     if (!state.items.length){ feed.appendChild(el("div","empty","아직 수집된 이슈가 없습니다. 정해진 갱신 시각에 새 이슈가 자동으로 추가됩니다.")); return; }
     const list = filtered(false).sort((x,y) => (y.date||"").localeCompare(x.date||"") || (Number(y.importance)||0)-(Number(x.importance)||0) || (y.addedAt||"").localeCompare(x.addedAt||""));
@@ -272,6 +303,131 @@ footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
       h.appendChild(el("span","d", d.length === 10 ? fmtDay(d) : d)); h.appendChild(el("span","c", `${items.length}건`));
       sec.appendChild(h); const l = el("div","list"); items.forEach(it => l.appendChild(card(it))); sec.appendChild(l); feed.appendChild(sec);
     });
+  }
+  let CY = null, cyLoading = false;
+  const fmt = (v, d=0) => v == null || isNaN(v) ? "–" : Number(v).toLocaleString("en-US", {minimumFractionDigits:d, maximumFractionDigits:d});
+  const pct = (v, d=1) => v == null || isNaN(v) ? "–" : (v > 0 ? "+" : "") + Number(v).toFixed(d) + "%";
+  const cls = v => v > 0 ? "up" : v < 0 ? "down" : "";
+  function td(text, c){ const x = el("td", c || null, text); return x; }
+  function table(head, rows){
+    const w = el("div","cy-tw"), t = el("table","cy-t"), tr = el("tr");
+    head.forEach(h => tr.appendChild(el("th", null, h))); const th = el("thead"); th.appendChild(tr); t.appendChild(th);
+    const tb = el("tbody"); rows.forEach(r => { const x = el("tr"); r.forEach(c => x.appendChild(c instanceof Node ? c : td(String(c)))); tb.appendChild(x); }); t.appendChild(tb);
+    w.appendChild(t); return w;
+  }
+  function link(label, url){ const u = safeUrl(url); if (!u) return null; const a = el("a", null, label + " ↗"); a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer"; return a; }
+  function sec(title, q){ const s = el("section","cy-sec"); s.appendChild(el("h2", null, title)); if (q) s.appendChild(el("p","q", q)); return s; }
+  function srcList(items){
+    const ul = el("ul","cy-list");
+    (items||[]).forEach(x => { const li = el("li", null, x.text || ""); if (x.source){ const a = link(x.source, x.url); if (a) li.appendChild(a); else li.appendChild(el("span","cy-note"," (" + x.source + ")")); } ul.appendChild(li); });
+    return ul;
+  }
+  const shares = v => v == null ? "–" : (v > 0 ? "+" : "") + (Math.abs(v) >= 10000 ? (v/10000).toFixed(1) + "만" : fmt(v));
+  function renderCycle(feed){
+    if (!CY){
+      feed.appendChild(el("div","empty","사이클 점검 데이터를 불러오는 중입니다…"));
+      if (!cyLoading){ cyLoading = true; fetch((document.documentElement.dataset.cycle || "data/cycle.json") + "?t=" + Math.floor(Date.now()/60000), {cache:"no-store"}).then(r => r.ok ? r.json() : null).then(d => { CY = d || {}; if (state.tab === "cycle") render(); }).catch(() => { CY = {}; if (state.tab === "cycle") render(); }); }
+      return;
+    }
+    const A = CY.auto || {}, M = CY.manual || {}, H = CY.history || {};
+    const wrap = el("div","cy");
+    const head = el("div","cy-head");
+    head.appendChild(el("b", null, "읽는 법 ")); head.appendChild(document.createTextNode("메모리 주가는 제품 가격보다 2~3개 분기 앞서 움직이는 경향이 있어, 가격 자체보다 '이미 얼마나 반영됐는지'와 '기대가 바뀌는 방향'을 함께 봅니다. 자동 수치 " + (A.updated || "–") + " · 정리 " + (M.updated || "–") + " 기준."));
+    wrap.appendChild(head);
+
+    // 강세·약세 근거
+    const s0 = sec("강세 근거 vs 약세 근거", "지금 나와 있는 근거를 양쪽으로 나눠 정리했습니다. 결론은 내지 않습니다.");
+    const two = el("div","cy-two");
+    [["bull","강세 근거", M.bull],["bear","약세 근거", M.bear]].forEach(([c, t, list]) => { const col = el("div","cy-col " + c); col.appendChild(el("h3", null, t)); const ul = el("ul"); (list||[]).forEach(x => ul.appendChild(el("li", null, x))); col.appendChild(ul); two.appendChild(col); });
+    s0.appendChild(two); wrap.appendChild(s0);
+
+    // ① 주가 위치
+    const s1 = sec("① 주가 위치", "이미 얼마나 떨어졌나: 최근 2년 고점 대비 낙폭과 과거 하락 사이클 최대 낙폭 비교(종가 기준)");
+    (A.position||[]).forEach(p => {
+      const b = el("div","cy-bar"); const nm = el("div","nm"); nm.appendChild(el("span", null, p.name));
+      nm.appendChild(el("small", null, `현재 ${fmt(p.price, p.unit === "$" ? 2 : 0)}${p.unit === "$" ? "달러" : "원"} · 고점 ${fmt(p.peak, p.unit === "$" ? 2 : 0)} (${p.peakDate}) · 고점 후 ${p.daysFromPeak}일`)); b.appendChild(nm);
+      const rows = [{lb:"이번", v:p.drawdown, now:true, sub:""}].concat((p.past||[]).map(x => ({lb:x.label, v:x.drawdown, sub:`${x.months}개월`})));
+      rows.forEach(r => { const row = el("div","cy-row" + (r.now ? " now" : "")); row.appendChild(el("span","lb", r.lb + (r.sub ? " · " + r.sub : ""))); const tr = el("div","cy-track"); const f = el("div","cy-fill"); f.style.width = Math.min(100, Math.abs(r.v)/80*100) + "%"; tr.appendChild(f); row.appendChild(tr); row.appendChild(el("span","v", r.v + "%")); b.appendChild(row); });
+      s1.appendChild(b);
+    });
+    s1.appendChild(el("p","cy-note","막대 길이는 -80%를 끝으로 한 비율입니다. 과거 사이클 기간은 고점에서 저점까지 걸린 개월 수(주간 종가 기준)이고, 하락 폭이 과거와 같다고 바닥이라는 뜻은 아닙니다. 출처: Yahoo Finance"));
+    wrap.appendChild(s1);
+
+    // ② 밸류에이션
+    const s2 = sec("② 밸류에이션", "메모리주는 이익이 최대일 때 PER이 가장 낮아 보이는 경향이 있어, 사이클 판단에는 PBR을 함께 봅니다");
+    const V = A.valuation || {};
+    const yrs = [...new Set(Object.values(V).flatMap(v => (v.annual||[]).map(a => a.year)))].sort();
+    const vrows = Object.entries(V).map(([n, v]) => {
+      const r = [n, fmt(v.per,2) + "배", fmt(v.fper,2) + "배", fmt(v.pbr,2) + "배"];
+      yrs.forEach(y => { const a = (v.annual||[]).find(x => x.year === y); r.push(a ? fmt(a.pbr,2) + (a.estimate ? "(E)" : "") : "–"); });
+      r.push(fmt(v.divYield,2) + "%"); return r;
+    });
+    s2.appendChild(table(["종목","PER","추정PER","PBR"].concat(yrs.map(y => y + " 말 PBR")).concat(["배당수익률"]), vrows));
+    s2.appendChild(el("p","cy-note","현재 PBR은 최근 결산 주당순자산(BPS) 기준입니다. 연말 PBR의 (E)는 올해 추정 BPS 기준이라, 이익이 쌓이는 만큼 낮아집니다. 마이크론은 무료 데이터가 없어 제외. 출처: 네이버 증권(FnGuide)"));
+    wrap.appendChild(s2);
+
+    // ③ 기대의 방향
+    const s3 = sec("③ 기대의 방향", "시장의 눈높이가 내려가는 속도: 목표가 변경 건수와 컨센서스 추이");
+    const C = M.consensus || {};
+    if (C.tally) s3.appendChild(el("div","cy-tally", C.tally));
+    if ((C.changes||[]).length) s3.appendChild(table(["날짜","증권사","종목","목표가 변경","투자의견"], C.changes.map(c => [c.date, c.broker, c.ticker, `${c.from} → ${c.to}`, td(c.opinion, "l")])));
+    const K = A.consensus || {};
+    const crow = Object.entries(K).map(([n, c]) => {
+      const h = H[n] || [], first = h[0] || {}, last = h[h.length-1] || {};
+      const tg = first.target && last.target && h.length > 1 ? pct((last.target/first.target-1)*100) + ` (${first.date.slice(5)}~)` : "기록 시작";
+      const fe = first.feps && last.feps && h.length > 1 ? pct((last.feps/first.feps-1)*100) : "기록 시작";
+      return [n, fmt(c.target) + "원", tg, fmt((V[n]||{}).feps) + "원", fe];
+    });
+    if (crow.length){ s3.appendChild(el("div","cy-sub","네이버 컨센서스 추이(매일 기록)")); s3.appendChild(table(["종목","평균 목표가","목표가 변화","올해 추정 EPS","EPS 변화"], crow)); }
+    (C.notes||[]).forEach(n => s3.appendChild(el("p","cy-note", n)));
+    wrap.appendChild(s3);
+
+    // ④ 수급
+    const s4 = sec("④ 수급", "누가 사고 팔고 있나: 최근 5거래일 순매수(주식 수)와 외국인 보유율");
+    Object.entries(A.flows || {}).forEach(([n, f]) => {
+      s4.appendChild(el("div","cy-sub", n));
+      s4.appendChild(table(["날짜","외국인","기관","개인","외국인 보유율"], f.map(r => [r.date, td(shares(r.foreign), cls(r.foreign)), td(shares(r.organ), cls(r.organ)), td(shares(r.individual), cls(r.individual)), (r.foreignHold != null ? r.foreignHold.toFixed(2) + "%" : "–")])));
+    });
+    s4.appendChild(el("p","cy-note","대차잔고(공매도 대기 물량)와 신용잔고는 무료 자동 수집처가 없어, 관련 기사가 나오면 이슈로 다룹니다. 출처: 네이버 증권"));
+    wrap.appendChild(s4);
+
+    // ⑤ 선행 지표
+    const s5 = sec("⑤ 선행 지표", "주가보다 먼저 방향을 알려주는 것: 현물가·계약가, 대만 월매출, 한국 반도체 수출");
+    const SP = A.spot || {}, sh = H.spot || [], s0h = sh[0] || {};
+    if ((SP.items||[]).length){
+      s5.appendChild(el("div","cy-sub","메모리 현물가 (DRAMeXchange 세션 평균, 달러)"));
+      s5.appendChild(table(["품목","현물가","전일 대비","기록 시작 대비"], SP.items.map(i => [i.label, fmt(i.avg,3), td(pct(i.chg,2), cls(i.chg)), (sh.length > 1 && s0h[i.label]) ? td(pct((i.avg/s0h[i.label]-1)*100) + ` (${s0h.date.slice(5)}~)`, cls(i.avg - s0h[i.label])) : "기록 시작"])));
+      if (SP.asOf) s5.appendChild(el("p","cy-note","기준 " + SP.asOf + ". 현물가가 계약가보다 낮으면 계약가 하락의 선행 신호로, 현물가가 다시 오르기 시작하면 초기 바닥 신호로 자주 해석됩니다."));
+    }
+    if ((M.contract||[]).length){
+      s5.appendChild(el("div","cy-sub","계약가 전망"));
+      s5.appendChild(table(["항목","전망","메모"], M.contract.map(c => { const n = td(c.note || "", "l"); const a = link(c.source, c.url); if (a) n.appendChild(a); return [c.label, c.value, n]; })));
+    }
+    if ((A.taiwan||[]).length){
+      s5.appendChild(el("div","cy-sub","대만 메모리 업체 월매출 (억 대만달러)"));
+      s5.appendChild(table(["회사","기준월","매출","전월 대비","전년 대비"], A.taiwan.map(t => [t.name, t.month, fmt(t.revenue,1), td(pct(t.mom), cls(t.mom)), td(pct(t.yoy), cls(t.yoy))])));
+      s5.appendChild(el("p","cy-note","매달 10일 전후 발표. 전월 대비 증가율이 꺾이는지가 업황 체감의 단서입니다. 출처: 대만증권거래소 공개 데이터"));
+    }
+    if ((M.exports||[]).length){
+      s5.appendChild(el("div","cy-sub","한국 반도체 수출"));
+      s5.appendChild(table(["기간","금액","메모"], M.exports.map(c => { const n = td(c.note || "", "l"); const a = link(c.source, c.url); if (a) n.appendChild(a); return [c.label, c.value, n]; })));
+    }
+    wrap.appendChild(s5);
+
+    // ⑥ 수요·공급
+    const s6 = sec("⑥ 수요와 공급", "이번 하락 논리('AI 투자 둔화', '2027~28년 공급 과잉')를 검증하는 재료");
+    s6.appendChild(el("div","cy-sub","수요: AI 투자·고객사")); s6.appendChild(srcList(M.demand));
+    s6.appendChild(el("div","cy-sub","공급: 증설·경쟁")); s6.appendChild(srcList(M.supply));
+    wrap.appendChild(s6);
+
+    // ⑦ 일정
+    if ((M.events||[]).length){
+      const s7 = sec("⑦ 판단에 중요한 일정");
+      s7.appendChild(table(["날짜","일정","왜 중요한가"], M.events.filter(e => (e.date||"") >= todayKST()).map(e => [e.date.slice(5).replace("-","."), td(e.title, "l"), td(e.why || "", "l")])));
+      wrap.appendChild(s7);
+    }
+    wrap.appendChild(el("p","cy-note","이 탭은 공개 자료를 모아 정리한 참고용이며 투자 권유가 아닙니다. 수치는 출처 기준이며 원문에서 확인하세요."));
+    feed.appendChild(wrap);
   }
   render();
 

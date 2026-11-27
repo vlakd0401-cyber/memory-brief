@@ -36,8 +36,15 @@
 5. 쓰기: 새 항목을 추가하고 date 내림차순(같으면 importance 내림차순)으로 정렬해 data/issues.json을 "한 줄에 한 항목" 형식(ensure_ascii=False)으로 다시 씁니다. JSON 파싱을 확인합니다.
 6. 지표 갱신: data/indicators.json 각 항목(group·label·unit·sym 유지. sym이 있는 항목은 페이지가 장중 1분마다 실시간 시세로 덮어쓰지만, 시세를 못 받을 때를 대비해 값을 계속 갱신)의 value(천 단위 쉼표 문자열), change, dir(up|down|flat), asOf(기준일, 예 "11/27"), source를 최신값으로 고치고 최상위 asOf에 수집 시각("YYYY-MM-DD HH:MM (KST)")을 씁니다. 종가는 해당 시장의 최신 정규장 종가를 씁니다. 신뢰할 만한 값을 못 찾으면 직전 값과 asOf를 그대로 둡니다(추정치 금지). 출처끼리 다르면 거래소·지수 관리 기관 값을 우선합니다.
 7. 일정 갱신: data/calendar.json에서 지난 일정은 지우고, 앞으로 6주 안의 주요 일정을 추가·확인합니다: 美 고용보고서·CPI·PPI·PCE·소매판매·GDP, FOMC, 한국은행 금통위, 한국 수출입 동향(매월 1일, 1~20일 수출), 삼성전자·SK하이닉스·마이크론·알파벳·엔비디아 실적 발표, 주요 업계 행사(CES 등). date·time은 한국시간으로 변환(미 동부 8:30 = 한국 22:30, 서머타임 기간에는 21:30). 회사가 공식 발표하지 않은 날짜는 note에 "예상 일정"이라고 씁니다. kind: macro|earn|kr.
+7-1. 사이클 점검 탭(data/cycle.json): 매 회차 `python3 tools/cycle.py`를 실행해 자동 수치(고점 대비 낙폭·과거 사이클 비교, PER·PBR, 네이버 컨센서스, 5거래일 수급, DRAMeXchange 현물가, 대만 메모리 3사 월매출)를 갱신합니다. 일부 실패는 직전 값을 유지하므로 오류 메시지만 확인합니다. 그다음 "manual" 부분을 이번 회차에 확인한 사실로 고칩니다(바뀐 게 없으면 그대로 두되 updated는 갱신):
+   - consensus.changes: 삼성전자·SK하이닉스·마이크론 목표가·투자의견 변경을 {"date","broker","ticker","from","to","opinion"}로 추가(최신순, 최근 60일만 유지)하고 tally(이번 달 하향·상향 건수 요약)를 다시 씁니다.
+   - contract: 트렌드포스 등 계약가 전망이 새로 나오면 같은 label 항목을 교체. exports: 한국 반도체 수출(1~10일, 1~20일, 월간)이 발표되면 추가하고 최근 6개만 유지.
+   - demand·supply: 빅테크 설비투자, 엔비디아·구글 수요, 메모리 3사·중국 증설 소식 중 사이클 판단에 의미 있는 것을 {"text","source","url"}로 추가(각 6개 안팎 유지, 오래된 것부터 삭제).
+   - bull·bear: 강세 근거·약세 근거를 각 3~5줄로 다시 정리. 수치와 출처 성격을 담고, 결론("매수/매도", "바닥이다")은 쓰지 않습니다. 양쪽의 균형을 유지합니다.
+   - events: 사이클 판단에 중요한 일정(마이크론 실적, 한국 수출, 대만 월매출, 계약가 발표 등) {"date","title","why"}. 지난 일정은 삭제.
+   - manual.updated에 "YYYY-MM-DD HH:MM"을 씁니다. 이 탭도 매매 추천을 하지 않습니다.
 8. data/meta.json을 {"lastUpdated":"YYYY-MM-DD (요일) HH:MM · HH:MM 회차 N건 추가","lastRun":"ISO시각"}로 갱신합니다(0건이어도 갱신).
-9. 커밋·푸시: `git add data && git commit -m "갱신: YYYY-MM-DD HH:MM 회차 N건"` 후 `git push origin main`. 거부되면 `git pull --rebase origin main` 후 한 번 더, 네트워크 오류는 2·4·8초 간격 최대 3회 재시도. main에 직접 푸시하고 브랜치·PR은 만들지 않습니다.
+9. 커밋·푸시: `git add data tools && git commit -m "갱신: YYYY-MM-DD HH:MM 회차 N건"` 후 `git push origin main`. 거부되면 `git pull --rebase origin main` 후 한 번 더, 네트워크 오류는 2·4·8초 간격 최대 3회 재시도. main에 직접 푸시하고 브랜치·PR은 만들지 않습니다.
 10. issues.json이 3,000건을 넘으면 오래된 것부터 지워 2,500건 이하로 유지합니다.
 11. 마지막으로 추가 건수와 핵심 이슈 제목, 갱신한 지표 수를 한국어로 3~6줄 요약해 답하세요.
 
