@@ -1,12 +1,12 @@
 {
- "asOf": "2026-11-27 15:55 (KST)",
+ "asOf": "2026-11-27 22:55 (KST)",
  "items": [
   {
    "group": "내 종목",
    "label": "삼성전자",
-   "value": "179,100",
+   "value": "179,500",
    "unit": "원",
-   "change": "4.55%",
+   "change": "4.79%",
    "dir": "up",
    "asOf": "11/27",
    "source": "네이버 증권",
@@ -15,9 +15,9 @@
   {
    "group": "내 종목",
    "label": "SK하이닉스",
-   "value": "1,110,000",
+   "value": "1,111,000",
    "unit": "원",
-   "change": "5.41%",
+   "change": "5.51%",
    "dir": "up",
    "asOf": "11/27",
    "source": "네이버 증권",
@@ -121,11 +121,11 @@
   {
    "group": "거시",
    "label": "원/달러",
-   "value": "1,341.9",
+   "value": "1,335.3",
    "unit": "원",
-   "change": "1.2원",
+   "change": "7.8원",
    "dir": "down",
-   "asOf": "11/27 11:40",
+   "asOf": "11/27 22:40",
    "source": "Yahoo Finance",
    "sym": "KRW=X"
   },
