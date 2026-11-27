@@ -363,7 +363,7 @@ footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
       r.push(fmt(v.divYield,2) + "%"); return r;
     });
     s2.appendChild(table(["종목","PER","추정PER","PBR"].concat(yrs.map(y => y + " 말 PBR")).concat(["배당수익률"]), vrows));
-    s2.appendChild(el("p","cy-note","현재 PBR은 최근 결산 주당순자산(BPS) 기준입니다. 연말 PBR의 (E)는 올해 추정 BPS 기준이라, 이익이 쌓이는 만큼 낮아집니다. 마이크론은 무료 데이터가 없어 제외. 출처: 네이버 증권(FnGuide)"));
+    s2.appendChild(el("p","cy-note","현재 PBR은 최근 결산 주당순자산(BPS) 기준입니다. 연말 PBR의 (E)는 올해 추정 BPS 기준이라, 이익이 쌓이는 만큼 낮아집니다. 마이크론은 연말 PBR 이력이 없어 현재 값만 표시. 출처: 네이버 증권(FnGuide), 마이크론은 Yahoo Finance"));
     wrap.appendChild(s2);
 
     // ③ 기대의 방향
@@ -388,7 +388,20 @@ footer{margin-top:36px;font-size:12.5px;color:var(--ink-2)}
       s4.appendChild(el("div","cy-sub", n));
       s4.appendChild(table(["날짜","외국인","기관","개인","외국인 보유율"], f.map(r => [r.date, td(shares(r.foreign), cls(r.foreign)), td(shares(r.organ), cls(r.organ)), td(shares(r.individual), cls(r.individual)), (r.foreignHold != null ? r.foreignHold.toFixed(2) + "%" : "–")])));
     });
-    s4.appendChild(el("p","cy-note","대차잔고(공매도 대기 물량)와 신용잔고는 무료 자동 수집처가 없어, 관련 기사가 나오면 이슈로 다룹니다. 출처: 네이버 증권"));
+    s4.appendChild(el("p","cy-note","출처: 네이버 증권"));
+    const LV = M.leverage || [];
+    if (LV.length){
+      s4.appendChild(el("div","cy-sub","신용융자·공매도 잔고 (기사·거래소 집계 기준)"));
+      s4.appendChild(table(["항목","잔고","기준일","메모"], LV.map(x => { const n = td(x.note || "", "l"); const a = link(x.source, x.url); if (a) n.appendChild(a); return [td(x.label, "l"), x.value, x.asOf || "", n]; })));
+      s4.appendChild(el("p","cy-note","신용융자는 급락 때 반대매매로 매도 압력을 키울 수 있고, 공매도 잔고가 많으면 반등 때 되사는 물량(숏커버링)이 될 수도, 반등을 누르는 부담이 될 수도 있습니다. 자동 집계처가 없어 기사에서 확인한 값입니다."));
+    }
+    const US = (A.usShort || {})["마이크론"];
+    if (US){
+      s4.appendChild(el("div","cy-sub","마이크론 공매도 (미국, 월 2회 집계)"));
+      const chg = US.shares && US.prior ? pct((US.shares/US.prior-1)*100) : "–";
+      s4.appendChild(table(["유통주식 대비","공매도 주식 수","직전 집계 대비","커버 일수","기준일"], [[ (US.pctFloat != null ? US.pctFloat.toFixed(2) + "%" : "–"), fmt(US.shares), td(chg, cls(US.shares - US.prior)), (US.daysToCover != null ? US.daysToCover.toFixed(2) + "일" : "–"), US.date || "–" ]]));
+      s4.appendChild(el("p","cy-note","커버 일수 = 공매도 잔고를 하루 평균 거래량으로 되사는 데 걸리는 일수. 출처: Yahoo Finance(나스닥 집계)"));
+    }
     wrap.appendChild(s4);
 
     // ⑤ 선행 지표

@@ -9,13 +9,14 @@ data/cycle.json 의 "auto" 부분만 다시 쓰고, Claude가 쓰는 "manual" �
 
 수집 항목
 - 주가 위치: 최근 2년 고점 대비 낙폭, 과거 하락 사이클(2018~19, 2021~23) 최대 낙폭·기간 (Yahoo Finance)
-- 밸류에이션: PER, 추정PER, PBR, 연말 PBR, 배당수익률 (네이버 증권)
+- 밸류에이션: PER, 추정PER, PBR, 연말 PBR, 배당수익률 (네이버 증권, 마이크론은 Yahoo Finance)
+- 마이크론 공매도: 유통주식 대비 공매도 비율, 잔고 주식 수, 커버 일수 (Yahoo Finance, 월 2회 집계)
 - 컨센서스: 네이버(FnGuide) 평균 목표가·추정 EPS. 매일 한 번 history 에 쌓아 방향을 봅니다
 - 수급: 최근 5거래일 외국인·기관·개인 순매수(주), 외국인 보유율 (네이버 증권)
 - 현물가: DDR5 16Gb, DDR4 16Gb, DDR4 8Gb, NAND 512Gb TLC (DRAMeXchange 세션 평균)
 - 대만 월매출: 난야·윈본드·매크로닉스 (대만증권거래소 공개 데이터)
 """
-import json, re, sys, html, datetime as dt, urllib.request, urllib.parse
+import json, re, sys, html, datetime as dt, urllib.request, urllib.parse, http.cookiejar
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -109,6 +110,32 @@ def position():
     return rows
 
 
+def us_stats(sym="MU"):
+    """마이크론 PER·PBR·공매도 비율 (Yahoo Finance, 쿠키+crumb 필요)."""
+    cj = http.cookiejar.CookieJar()
+    op = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+    op.addheaders = [("User-Agent", "Mozilla/5.0")]
+    try:
+        op.open("https://fc.yahoo.com", timeout=20)
+    except Exception:
+        pass  # 404여도 쿠키는 받음
+    crumb = op.open("https://query2.finance.yahoo.com/v1/test/getcrumb", timeout=20).read().decode().strip()
+    url = (f"https://query2.finance.yahoo.com/v10/finance/quoteSummary/{sym}?modules=defaultKeyStatistics,summaryDetail"
+           f"&crumb={urllib.parse.quote(crumb)}")
+    r = json.loads(op.open(url, timeout=20).read().decode())["quoteSummary"]["result"][0]
+    k, s = r["defaultKeyStatistics"], r["summaryDetail"]
+    g = lambda d, x: (d.get(x) or {}).get("raw")
+    sd = g(k, "dateShortInterest")
+    val = {"per": round(g(s, "trailingPE"), 2) if g(s, "trailingPE") else None,
+           "fper": round((g(s, "forwardPE") or g(k, "forwardPE")), 2) if (g(s, "forwardPE") or g(k, "forwardPE")) else None,
+           "pbr": round(g(k, "priceToBook"), 2) if g(k, "priceToBook") else None, "bps": g(k, "bookValue"),
+           "divYield": round(g(s, "dividendYield") * 100, 2) if g(s, "dividendYield") is not None else None, "annual": []}
+    short = {"pctFloat": round(g(k, "shortPercentOfFloat") * 100, 2) if g(k, "shortPercentOfFloat") is not None else None,
+             "shares": g(k, "sharesShort"), "prior": g(k, "sharesShortPriorMonth"), "daysToCover": g(k, "shortRatio"),
+             "date": dt.datetime.fromtimestamp(sd, KST).strftime("%Y-%m-%d") if sd else ""}
+    return val, short
+
+
 def naver(code):
     d = jget(f"https://m.stock.naver.com/api/stock/{code}/integration")
     info = {t.get("code"): t.get("value") for t in d.get("totalInfos", [])}
@@ -196,6 +223,12 @@ def main():
         auto["valuation"] = {k: v["val"] for k, v in kr.items()}
         auto["flows"] = {k: v["flows"] for k, v in kr.items()}
         auto["consensus"] = {k: v["cons"] for k, v in kr.items()}
+    try:
+        mv, ms = us_stats("MU")
+        auto.setdefault("valuation", {})["마이크론"] = mv
+        auto["usShort"] = {"마이크론": ms}
+    except Exception as e:
+        print("마이크론 지표 실패(직전 값 유지):", e, file=sys.stderr)
     step("spot", spot)
     step("taiwan", taiwan)
     auto["updated"] = NOW.strftime("%Y-%m-%d %H:%M")
