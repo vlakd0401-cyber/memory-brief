@@ -1,5 +1,5 @@
 {
- "asOf": "2026-11-27 22:55 (KST)",
+ "asOf": "2026-11-28 10:00 (KST)",
  "items": [
   {
    "group": "내 종목",
@@ -26,45 +26,45 @@
   {
    "group": "내 종목",
    "label": "마이크론(MU)",
-   "value": "601.25",
+   "value": "646.95",
    "unit": "$",
-   "change": "4.53%",
-   "dir": "down",
-   "asOf": "11/25",
+   "change": "7.60%",
+   "dir": "up",
+   "asOf": "11/27",
    "source": "Nasdaq",
    "sym": "MU"
   },
   {
    "group": "내 종목",
    "label": "구글(GOOGL)",
-   "value": "273.10",
+   "value": "274.96",
    "unit": "$",
-   "change": "2.13%",
-   "dir": "down",
-   "asOf": "11/25",
+   "change": "0.68%",
+   "dir": "up",
+   "asOf": "11/27",
    "source": "Nasdaq",
    "sym": "GOOGL"
   },
   {
    "group": "내 종목",
    "label": "SOXL",
-   "value": "30.47",
+   "value": "36.57",
    "unit": "$",
-   "change": "등락률 확인 중",
-   "dir": "flat",
-   "asOf": "11/25",
+   "change": "14.21%",
+   "dir": "up",
+   "asOf": "11/27",
    "source": "NYSE Arca",
    "sym": "SOXL"
   },
   {
    "group": "업황",
    "label": "SOX 지수",
-   "value": "8,454.08",
+   "value": "9,186.71",
    "unit": "",
-   "change": "4.28%",
-   "dir": "down",
-   "asOf": "11/25",
-   "source": "Nasdaq",
+   "change": "4.69%",
+   "dir": "up",
+   "asOf": "11/27",
+   "source": "Yahoo Finance",
    "sym": "^SOX"
   },
   {
@@ -100,11 +100,11 @@
   {
    "group": "거시",
    "label": "나스닥",
-   "value": "23,585.80",
+   "value": "24,129.50",
    "unit": "",
-   "change": "0.62%",
-   "dir": "down",
-   "asOf": "11/25",
+   "change": "2.30%",
+   "dir": "up",
+   "asOf": "11/27",
    "source": "Nasdaq",
    "sym": "^IXIC"
   },
@@ -121,11 +121,11 @@
   {
    "group": "거시",
    "label": "원/달러",
-   "value": "1,335.3",
+   "value": "1,333.0",
    "unit": "원",
-   "change": "7.8원",
+   "change": "2.3원",
    "dir": "down",
-   "asOf": "11/27 22:40",
+   "asOf": "11/28",
    "source": "Yahoo Finance",
    "sym": "KRW=X"
   },
